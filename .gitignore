@@ -1,0 +1,4 @@
+.DS_Store
+datathon/images/*
+datathon/dataset/*.csv
+datathon.zip
