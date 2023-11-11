@@ -4,5 +4,4 @@ datathon/dataset/*.csv
 datathon.zip
 X.csv
 visual.py
-model.pkl
 visual.py
