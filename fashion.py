@@ -113,15 +113,17 @@ def get_recommendation(model, x, item_id, k=10, embeddings=None):
     # load dataset/dict_modelo_index.pickle
     index_dict = pickle.load(open("dataset/dict_modelo_index.pickle", "rb"))
     item_id = index_dict[item_id]
-    Lp = LpDistance(normalize_embeddings=False)
+    Lp = LpDistance(normalize_embeddings=True)
+
     Lp_sim = Lp(embeddings)
     # get row i
-    Lp_sim = Lp_sim[item_id]
+    Lp_sim = Lp_sim[:, item_id]
     idx = torch.argsort(Lp_sim.squeeze())
 
     topk = list(zip(idx.tolist(), Lp_sim[idx].tolist()))
 
     topk.sort(key=lambda x: x[1], reverse=True)
+    print(topk[:5])
     return topk[:k]
 
 
