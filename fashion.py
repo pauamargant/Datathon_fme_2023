@@ -1,6 +1,7 @@
 from pytorch_metric_learning.distances import LpDistance
 import matplotlib.pyplot as plt
 import torch
+import streamlit as st
 
 
 def display_images(paths):
@@ -17,7 +18,7 @@ def display_images(paths):
 def get_image_path(cod_modelo_color, outfit_data):
     return outfit_data[outfit_data["cod_modelo_color"] == cod_modelo_color][
         "des_filename"
-    ].values[0]
+    ].values[0][9:]
 
 
 from pytorch_metric_learning.distances import LpDistance
@@ -40,3 +41,8 @@ def get_recommendation(model, x, item_id, k=10, embeddings=None):
 
     topk.sort(key=lambda x: x[1], reverse=True)
     return topk[:k]
+
+
+def find_item(filtered, k=1):
+    # sample k rows from filtered
+    return filtered.sample(k)["cod_modelo_color"].values
